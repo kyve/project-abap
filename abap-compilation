@@ -1,0 +1,325 @@
+REPORT YWRITE193 NO STANDARD PAGE HEADING.
+ULINE AT 3(45).
+WRITE:/3 SY-VLINE, 47 SY-VLINE.
+WRITE:/3 SY-VLINE, 47 SY-VLINE.
+ULINE AT 10(29).
+WRITE: /3 SY-VLINE, 10 '|', 'This list was generated: ', '|',  47 SY-VLINE.
+WRITE:/3 SY-VLINE, 47 SY-VLINE.
+ULINE AT 10(29).
+WRITE:/3 SY-VLINE, 47 SY-VLINE.
+WRITE:/3 SY-VLINE, 47 SY-VLINE.
+WRITE:/3 SY-VLINE, 10'ON: ', 47 SY-VLINE.
+FORMAT COLOR 3.
+WRITE: 15 sy-datum.
+FORMAT COLOR OFF.
+NEW-LINE.
+WRITE:/3 SY-VLINE, 10'AT: ', 47 SY-VLINE.
+FORMAT COLOR 6.
+WRITE:15 sy-uzeit.
+FORMAT COLOR OFF.
+NEW-LINE.
+WRITE:/3 SY-VLINE, 10'BY: ', 47 SY-VLINE.
+FORMAT COLOR 5.
+WRITE:15 sy-uname.
+FORMAT COLOR OFF.
+WRITE:/3 SY-VLINE, 47 SY-VLINE.
+WRITE:/3 SY-VLINE, 47 SY-VLINE.
+WRITE:/3 SY-VLINE, 47 SY-VLINE.
+WRITE:/3 SY-VLINE, 47 SY-VLINE.
+ULINE AT 3(45).
+
+"======================================================================================="
+
+REPORT YPROFILE193A NO STANDARD PAGE HEADING.
+ULINE AT 1(110).
+SKIP.
+WRITE:/ 'User: ', sy-uname, 80'Run Date:',sy-datum.
+WRITE: /80'Run Time:',sy-uzeit.
+SKIP.
+ULINE AT 1(110).
+SKIP.
+FORMAT COLOR 1.
+WRITE:'NAME'.
+FORMAT COLOR OFF.
+WRITE:10':','KATRINA YSABEL V. ESDICUL'.
+SKIP.
+ULINE AT 10(88).
+WRITE: 10 SY-VLINE.
+NEW-LINE.
+WRITE: 12 'Company' COLOR 3, 30'|'.
+WRITE:31'Department' COLOR 3, 60'|'.
+WRITE:61'Designation' COLOR 3, 80'|'.
+WRITE:81'Effective On' COLOR 3, 97'|'.
+NEW-LINE.
+ULINE AT 10(88).
+WRITE: /10 SY-VLINE, 'Ufotable', 30'|', 'Background', 60'|', '3D Animator', 80'|', sy-datum, 97'|'.
+WRITE: /10 SY-VLINE, 'Sunrise', 30'|', 'Storyboard', 60'|', '2D Animator', 80'|', sy-datum, 97'|'.
+WRITE: /10 SY-VLINE, 'Madhouse', 30'|', 'Scanning', 60'|', '2D Animator', 80'|', sy-datum, 97'|'.
+NEW-LINE.
+ULINE AT 10(88).
+
+"======================================================================================="
+
+
+REPORT YARITH193A NO STANDARD PAGE HEADING.
+
+DATA: NUM1 TYPE I VALUE 10, NUM2 TYPE I VALUE 4.
+DATA: SUM TYPE I, DIFFERENCE TYPE I, QUOTIENT TYPE I, PRODUCT TYPE I, RESULT TYPE I.
+SUM = NUM1 + NUM2.
+QUOTIENT = SUM / 2.
+DIFFERENCE = QUOTIENT - 1.
+PRODUCT = DIFFERENCE * 100.
+RESULT = ( ( ( ( NUM1 + NUM2 ) / 2 ) - 1 ) * 100 ).
+
+
+WRITE: 'Name:', 'Katrina Ysabel V. Esdicul'.
+NEW-LINE.
+WRITE: 'Date:', sy-datum.
+SKIP.
+WRITE: 'Sum of two Even Numbers: ', 60 SUM.
+WRITE:/ 'Divided by 2 will give the result: ', 60 QUOTIENT.
+WRITE:/ 'Subtracting by  1 will have the result: ', 60 DIFFERENCE.
+WRITE:/ 'This will be the product if multiplied by 100: ', 60 PRODUCT.
+WRITE:/ 'Combined all of this will have the same result as: ', 60 RESULT.
+
+"======================================================================================="
+
+REPORT YPARAM193A NO STANDARD PAGE HEADING.
+
+PARAMETERS FNUM TYPE I.
+PARAMETERS SNUM TYPE I.
+PARAMETERS MULT TYPE I.
+
+DATA: SUM TYPE I, DIFFERENCE TYPE I, QUOTIENT TYPE I, PRODUCT TYPE I, RESULT TYPE I.
+SUM = FNUM + SNUM.
+QUOTIENT = SUM / 2.
+DIFFERENCE = QUOTIENT - 1.
+PRODUCT = DIFFERENCE * 100.
+RESULT = ( ( ( ( FNUM + SNUM ) / 2 ) - 1 ) * 100 ).
+
+WRITE: 'Name:', 'Katrina Ysabel V. Esdicul'.
+NEW-LINE.
+WRITE: 'Date:', sy-datum.
+SKIP.
+WRITE: 'Two Even Numbers: ', 50 FNUM, '&', SNUM.
+WRITE:/ 'Sum of two Even Numbers: ', 60 SUM.
+WRITE:/ 'Divided by 2 will give the result: ', 60 QUOTIENT.
+WRITE:/ 'Subtracting by  1 will have the result: ', 60 DIFFERENCE.
+WRITE:/ 'This will be the product if multiplied by 100: ', 60 PRODUCT.
+WRITE:/ 'Combined all of this will have the same result as: ', 60 RESULT.
+
+"======================================================================================="
+
+REPORT YDATE193A NO STANDARD PAGE HEADING.
+
+PARAMETERS date TYPE sy-datum.
+PARAMETERS days TYPE I.
+
+DATA RESULT TYPE sy-datum.
+
+RESULT = date + days.
+
+WRITE: 'Name: ', 10 'Katrina Ysabel V. Esdicul'. 
+WRITE: /'Date: ', sy-datum.
+SKIP.
+WRITE: 'The date after ', days, 'is ' ,RESULT.
+
+"======================================================================================="
+
+REPORT YITAB1193A NO STANDARD PAGE HEADING.
+
+TABLES SPFLI.
+DATA: BEGIN OF spflitab OCCURS 0,
+    CARRID TYPE spfli-carrid,
+    CONNID TYPE spfli-connid,
+    CITYFROM TYPE spfli-cityfrom,
+    CITYTO TYPE spfli-cityto,
+       END OF spflitab.
+
+WRITE: /1 'CARRID', 21 'CONNID', 41 'CITYFROM', 61 'CITYTO'.
+SKIP.
+
+SELECT CARRID CONNID CITYFROM CITYTO FROM SPFLI INTO spflitab.
+    WRITE: /1 spflitab-carrid, 21 spflitab-connid, 41 spflitab-cityfrom, 61 spflitab-cityto.
+  ENDSELECT.
+
+"======================================================================================="
+
+PARAMETERS:
+  rb1 RADIOBUTTON GROUP rg1,
+  rb2 RADIOBUTTON GROUP rg1,
+  rb3 RADIOBUTTON GROUP rg1,
+  rb4 RADIOBUTTON GROUP rg1,
+  rb5 RADIOBUTTON GROUP rg1.
+
+TABLES: spfli.
+
+TYPES:
+  BEGIN OF spfliType,
+    carrid TYPE spfli-carrid,
+    connid TYPE spfli-connid,
+    cityfrom TYPE spfli-cityfrom,
+    cityto TYPE spfli-cityto,
+    countryfr TYPE spfli-countryfr,
+    countryto TYPE spfli-countryto,
+  END OF spfliType,
+
+  BEGIN OF spfliDiffType,
+    carrid TYPE spfli-carrid,
+    connid TYPE spfli-connid,
+    cityfrom TYPE spfli-cityfrom,
+    cityto TYPE spfli-cityto,
+    country_fr TYPE spfli-countryfr,
+    country_to TYPE spfli-countryto,
+  END OF spfliDiffType.
+
+IF rb1 = 'X'.
+  DATA: fliTbl TYPE spfliType OCCURS 0 WITH HEADER LINE.
+
+  SELECT * FROM spfli APPENDING CORRESPONDING FIELDS OF TABLE fliTbl.
+
+  WRITE: 'CARRID', 10 'CONNID', 20 'CITYFROM', 40 'CITYTO'.
+  ULINE.
+
+  LOOP AT fliTbl.
+    WRITE: / fliTbl-carrid, 10 fliTbl-connid, 20 fliTbl-cityfrom, 40 fliTbl-cityto.
+  ENDLOOP.
+
+  SKIP 1.
+
+  ULINE.
+  WRITE: 'CARRID', 10 'CONNID', 20 'COUNTRYFR', 32 'COUNTRYTO'.
+  ULINE.
+
+  SELECT * FROM spfli APPENDING CORRESPONDING FIELDS OF TABLE fliTbl.
+
+  LOOP AT fliTbl.
+    WRITE: / fliTbl-carrid, 10 fliTbl-connid, 20 fliTbl-countryfr, 32 fliTbl-countryto.
+  ENDLOOP.
+
+ELSEIF rb2 = 'X'.
+
+  SELECT * FROM spfli INTO CORRESPONDING FIELDS OF TABLE fliTbl.
+
+  WRITE: 'CARRID', 10 'CONNID', 20 'CITYFROM', 40 'CITYTO'.
+  ULINE.
+
+  LOOP AT fliTbl.
+    WRITE: / fliTbl-carrid, 10 fliTbl-connid, 20 fliTbl-cityfrom, 40 fliTbl-cityto.
+  ENDLOOP.
+
+  SKIP 1.
+
+  ULINE.
+  WRITE: 'CARRID', 10 'CONNID', 20 'COUNTRYFR', 32 'COUNTRYTO'.
+  ULINE.
+
+  SELECT * FROM spfli INTO CORRESPONDING FIELDS OF TABLE fliTbl.
+
+  LOOP AT fliTbl.
+    WRITE: / fliTbl-carrid, 10 fliTbl-connid, 20 fliTbl-countryfr, 32 fliTbl-countryto.
+  ENDLOOP.
+
+ELSEIF rb3 = 'X'.
+
+  DATA: fliDiffTbl TYPE spfliDiffType OCCURS 0 WITH HEADER LINE.
+
+  SELECT * FROM spfli APPENDING CORRESPONDING FIELDS OF TABLE fliDiffTbl.
+
+  WRITE: 'CARRID', 10 'CONNID', 20 'CITYFROM', 40 'CITYTO', 60 'COUNTRY_FR', 75 'COUNTRY_TO'.
+  ULINE.
+
+  LOOP AT fliDiffTbl.
+    WRITE: / fliDiffTbl-carrid, 10 fliDiffTbl-connid, 20 fliDiffTbl-cityfrom, 40 fliDiffTbl-cityto, 60 fliDiffTbl-country_fr, 75 fliDiffTbl-country_to.
+  ENDLOOP.
+
+ELSEIF rb4 = 'X'.
+  SELECT carrid, connid, cityfrom, cityto, countryfr, countryto
+    FROM spfli
+    INTO @fliDiffTbl.
+    APPEND fliDiffTbl.
+  ENDSELECT.
+
+  WRITE: 'CARRID', 10 'CONNID', 20 'CITYFROM', 40 'CITYTO', 60 'COUNTRY_FR', 75 'COUNTRY_TO'.
+  ULINE.
+
+  LOOP AT fliDiffTbl.
+    WRITE: / fliDiffTbl-carrid, 10 fliDiffTbl-connid, 20 fliDiffTbl-cityfrom, 40 fliDiffTbl-cityto, 60 fliDiffTbl-country_fr, 75 fliDiffTbl-country_to.
+  ENDLOOP.
+
+ELSEIF rb5 = 'X'.
+
+  SELECT SINGLE carrid, connid, cityfrom, cityto, countryfr, countryto
+    FROM spfli
+    INTO @fliDiffTbl.
+    APPEND fliDiffTbl.
+
+  WRITE: 'CARRID', 10 'CONNID', 20 'CITYFROM', 40 'CITYTO', 60 'COUNTRY_FR', 75 'COUNTRY_TO'.
+  ULINE.
+
+  LOOP AT fliDiffTbl.
+    WRITE: / fliDiffTbl-carrid, 10 fliDiffTbl-connid, 20 fliDiffTbl-cityfrom, 40 fliDiffTbl-cityto, 60 fliDiffTbl-country_fr, 75 fliDiffTbl-country_to.
+  ENDLOOP.
+ENDIF.
+
+"======================================================================================="
+
+REPORT YCTRL193A NO STANDARD PAGE HEADING.
+
+DATA: RESULT TYPE P LENGTH 16 DECIMALS 2.
+DATA: OPERATOR(20) TYPE C.
+
+PARAMETERS NUM1 TYPE P LENGTH 16 DECIMALS 2.
+PARAMETERS NUM2 TYPE P LENGTH 16 DECIMALS 2.
+
+PARAMETERS : ADD RADIOBUTTON GROUP OPRT.
+PARAMETERS : SUB RADIOBUTTON GROUP OPRT.
+PARAMETERS : MUL RADIOBUTTON GROUP OPRT DEFAULT 'X'.
+PARAMETERS : DIV RADIOBUTTON GROUP OPRT.
+
+PARAMETERS : OUTPUT AS CHECKBOX USER-COMMAND CB1 DEFAULT 'X'.
+
+    IF ADD = 'X'.
+      OPERATOR = ' + '.
+      RESULT = NUM1 + NUM2.
+
+    ELSEIF SUB = 'X'.
+      OPERATOR = ' - '.
+      RESULT = NUM1 - NUM2.
+
+    ELSEIF MUL = 'X'.
+      OPERATOR = ' x '.
+      RESULT = NUM1 * NUM2.
+
+    ELSEIF DIV = 'X'.
+
+      IF NUM2 = 0.
+
+         MESSAGE 'Second Number cannot be 0' TYPE 'E'.
+      ELSE.
+
+        OPERATOR = ' / '.
+        RESULT = NUM1 / NUM2.
+      ENDIF.
+    ENDIF.
+WRITE: 'SIMPLE CALCULATOR'.
+SKIP.
+
+IF OUTPUT = 'X'.
+  WRITE: NUM1, OPERATOR ,NUM2, ' = ', RESULT.
+  SKIP.
+
+  WRITE: 'DO.. ENDDO Statement'.
+  DO 3 TIMES.
+    WRITE: / 'ABAP1'.
+  ENDDO.
+
+  WRITE: 'WHILE.. ENDWHILE Statement'.
+  WHILE RESULT <> 0.
+    WRITE: / 'ABAP1'.
+    RESULT = RESULT - 1.
+    ENDWHILE.
+  ENDIF.
+
+=======================================================================================
+
