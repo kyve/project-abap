@@ -76,7 +76,7 @@ AT SELECTION-SCREEN OUTPUT.
       OTRte TYPE P LENGTH 8 DECIMALS 2. "OT Rate
   SELECTION-SCREEN END OF BLOCK O_TIME.
 
-  "Inome Rate"
+  "Income Rate"
   SELECTION-SCREEN BEGIN OF BLOCK INC_RATE WITH FRAME TITLE INC_RATE.
     PARAMETERS:
       mnthly RADIOBUTTON GROUP grp DEFAULT 'X', "Monthly
@@ -101,7 +101,7 @@ INITIALIZATION.
         OTPay TYPE I VALUE 0. "OT Pay
   END-OF-SELECTION.
 
-  "Pay Multiplier =============================================================================="
+  "Pay Multiplier"
   DATA: PayMult TYPE p DECIMALS 2. "Pay multiplier"
 
   "Payroll Period"
@@ -117,10 +117,9 @@ INITIALIZATION.
   ELSEIF payr_prd = '4'. "Monthly"
     PayMult = '1'. "number of days
   ENDIF.
-  "===============================================================================================
 
 
-  "Monthly Payment =============================================================================="
+  "Monthly Payment"
   DATA: n_basPay TYPE p DECIMALS 2, "New Base Pay
         m_basPay TYPE p DECIMALS 2. "Monthly Base Pay
 
@@ -136,9 +135,8 @@ INITIALIZATION.
   ELSEIF annual = 'X'. "Annual
     n_basPay = n_basPay * 12.
   ENDIF.
-  "===============================================================================================
 
-  "Allowance Computation =============================================================================="
+  "Allowance Computation"
   DATA: taxable TYPE p DECIMALS 2,
        n_taxable TYPE p DECIMALS 2.
 
@@ -157,9 +155,8 @@ INITIALIZATION.
     taxable = taxable * 12.
     n_taxable = n_taxable * 12.
   ENDIF.
-  "===============================================================================================
 
-  "SSS Contribution ==============================================================================
+  "SSS Contribution"
   DATA: SSSc TYPE P DECIMALS 2.
   
   IF m_basPay < 2250. "Monthly base pay less than 2250
@@ -179,9 +176,8 @@ INITIALIZATION.
   ELSEIF annual = 'X'. "Annual
     SSSc = SSSc * 12.
   ENDIF.
-  "===============================================================================================
 
-  "PhilHealth Contributions ==============================================================================
+  "PhilHealth Contributions"
   DATA: PHc TYPE P DECIMALS 2.
   
   IF m_basPay <= 10000. "Monthly base pay less than equal to 10000
@@ -201,9 +197,8 @@ INITIALIZATION.
   ELSEIF annual = 'X'. "Annual
     PHc = PHc * 12.
   ENDIF.
-  "===============================================================================================
 
-  " Pag Ibig Contributions ==============================================================================
+  "Pag Ibig Contributions"
   DATA: PIc TYPE P DECIMALS 2.
   IF m_basPay >= 5000. "Monthly base pay greater than equal to 5000
     PIc = 100.
@@ -222,7 +217,6 @@ INITIALIZATION.
   ELSEIF annual = 'X'. "Annual
     PIc = PIc * 12.
   ENDIF.
-  "===============================================================================================
 
   "Witholding tax"
   DATA:whTax TYPE P DECIMALS 2,
@@ -266,6 +260,14 @@ INITIALIZATION.
   "Net Pay"
   DATA: NPay TYPE P DECIMALS 2.
   NPay = gPay - totDeduc.
+  
+  "Overtime Pay"
+  "Hourly Rate x 125% (Ordinary day only)" 
+  
+  "Night Differential Pay" 
+  "Hourly rate × 10% × 8 hours"
+  
+  
   "Display All"
   WRITE: / 'Basic Pay: ', 90 bsc_pay.
   WRITE: / 'Taxable Allowance: ', 90 tax_awc.
